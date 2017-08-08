@@ -96,18 +96,16 @@
 
    一般会显示或隐藏元素，或者是改变元素样式，设计师会给定不同尺寸的设计稿，
 
-  前端工程师只要实现不同屏幕下对应的样式效果就可以。
+  前端工程师只要实现不同屏幕尺寸下对应的样式效果就可以。
 
    总结为: 搭建不同屏幕尺寸下的静态页面; 
 
-
+* 范例： 做一个简单的demo页面，加载不同样式，在moblie，pad，pc上有不同的样式呈现
 
 
 
 
 ## 第二章 自定义ui组件库
-
-
 
 
 
@@ -127,8 +125,7 @@
 
   范例：http://www.zcool.com.cn/work/ZMTcyMTM4NTI=/1.html 
 
-
-* 定义一组大小和颜色不同的按钮与文本框
+* 练习：定义三组不同样式的ui按钮组件
 
 
   ```
@@ -144,7 +141,6 @@
   .btn-alert{
       background-color:red;
   }
-
 
   // 定义文本框的颜色
   .has_success{
@@ -175,15 +171,39 @@
 >
 > bootstrap框架最新版底层就是基于sass。
 >
-> 区别：http://www.cnblogs.com/wangpenghui522/p/5467560.html
+> sass官网：https://www.sass.hk;
 
 
 
 ### 第二节 sass的安装与编译
 
 * sass的安装
-  * 下载和安装ruby 
-  * 下载和安装sass 
+  * 下载和安装ruby    验证： ruby -v   显示版本号
+
+  * 下载和安装sass  
+
+    >  gem install  // 将本地安装拖动到命令行处;
+    >
+    > 验证：sass -v      能显示版本号，安装成功;
+
+    ```
+    通过国内的淘宝镜像安装sass
+
+    $ gem sources --remove https://rubygems.org/
+
+    1) $ gem sources -a https://ruby.taobao.org/ 
+    2) gem sources -a http://gems.ruby-china.org
+
+    $ gem sources -l
+
+    https://ruby.taobao.org
+
+    $ gem install sass
+    ```
+
+    ​
+
+    ​
 
 
 * sass的编译
@@ -209,7 +229,9 @@
     >
     > sass --watch test.scss:css/test.css  // 自动编译
     >
-    > sass --watch app/sass:public/stylesheets  // 监测目录 
+    > sass --watch scss:css  // 监测目录 
+    >
+    > sass --watch scss:css --style compact
 
     ​
 
@@ -228,7 +250,7 @@
 
 *   编译的格式
 
-    * **nested：** 嵌套缩进的css代码
+    * **nested：** 嵌套缩进的css代码(默认)
 
     * **expanded：**展开的多行css代码（常规）
 
@@ -242,13 +264,6 @@
 
       ​
 
-* sass的导入
-
-  * sass的两种文件后缀名（sass和scss的区别）
-  * 为什么需要导入scss文件（模块化思想）
-  * 导入scss文件的基本语法
-
-  ​
 
 ```
 
@@ -325,7 +340,7 @@ body {
 
 $fontStack:    Helvetica, sans-serif;
 $primaryColor: #333;
-$side = left;
+$side : left;
 
 body {
   font-family: $fontStack;
@@ -333,8 +348,6 @@ body {
   border-#{side}-radius:5px;
 }
 ```
-
-
 
 
 
@@ -346,8 +359,7 @@ body {
 * sass的优点：简化css语法，层次结构清晰，可读性强
 * 选择器嵌套和属性嵌套
 * &父级选择器的使用（a的hover范例）
-
-
+* map文件的作用（关联css与scss文件，浏览器可以直接调试scss文件）
 
 
 
@@ -355,7 +367,7 @@ body {
 
 【范例2】 sass的嵌套使用 
 
-nav ul li;
+nav ul;
 nav li
 nav a
 
@@ -373,8 +385,14 @@ nav {
 
 // 属性嵌套
 
+// border:1px red solid;
+
+// border-width:1px
+// border-color:red;
+// border-style:solid;
+
 .border{
-     border{ width:1px; color:red; style:solid; }
+     border:{ width:1px; color:red; style:solid; }
 }
 
 相当于
@@ -385,10 +403,8 @@ nav {
     border-style:solid;
 }
 
-// border:1px red solid;
+
 ```
-
-
 
 
 
@@ -416,7 +432,7 @@ nav {
 @mixin rounded-corners {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  border-radius: 5px;
+   border-radius: 5px;
 }
 
 .notice {
@@ -443,7 +459,7 @@ nav {
     @include box-sizing(border-box);
 }
 
-//-------------------------------   
+//------------------------------- 
 ```
 
 
@@ -509,7 +525,6 @@ nav {
     extend .error;
     border:1px red solid;
 }
-
 ```
 
 
@@ -537,7 +552,6 @@ nav {
   @extend .message;
   border-color: yellow;
 }
-
 ```
 
 
@@ -561,7 +575,6 @@ aside[role="complimentary"] {
   float: right;
   width: 300px / 960px * 100%;
 }
-
 ```
 
 
@@ -594,6 +607,16 @@ a {
 
 // 此外还有 lighten($linkColor,10%);  颜色减轻10%;
 ```
+
+
+
+sass的导入
+
+- 为什么需要导入scss文件（模块化思想）
+- 导入scss文件的基本语法
+- 导入scss文件的优点
+
+​
 
 
 
@@ -630,8 +653,9 @@ $padding-small-vertical:    5px !default;
 $padding-small-horizontal:  10px !default;
 $font-size-small:ceil(($font-size-base * 0.85)) !default;
 $line-height-small:         1.5 !default;
-$border-radius-small:       3px !default;
 $btn-border-radius-small:  $border-radius-small !default;
+$border-radius-small:       3px !default;
+
 
 // 混合器的声明
 
