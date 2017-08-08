@@ -178,30 +178,13 @@
 ### 第二节 sass的安装与编译
 
 * sass的安装
-  * 下载和安装ruby    验证： ruby -v   显示版本号
+  * 下载和安装ruby   //   验证： ruby -v   显示版本号
 
   * 下载和安装sass  
 
-    >  gem install  // 将本地安装拖动到命令行处;
+    >  gem install   // 将本地sass文件拖动到此处;
     >
-    > 验证：sass -v      能显示版本号，安装成功;
-
-    ```
-    通过国内的淘宝镜像安装sass
-
-    $ gem sources --remove https://rubygems.org/
-
-    1) $ gem sources -a https://ruby.taobao.org/ 
-    2) gem sources -a http://gems.ruby-china.org
-
-    $ gem sources -l
-
-    https://ruby.taobao.org
-
-    $ gem install sass
-    ```
-
-    ​
+    >  验证：sass -v      能显示版本号，安装成功;
 
     ​
 
@@ -210,13 +193,13 @@
 
   * sass的文件格式 
 
-    > sass的编译 ： sass写好之后，在html页面中引入的仍然是css文件，只不过sass需要编译为对应的css再使用
+    > sass的编译 ：sass需要编译为css文件才可以在页面中使用;
     >
-    > Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：
+    > Sass 和 SCSS 区别：
     >
     > (1) 文件扩展名不同，Sass 是以“.sass”后缀为扩展名，而 SCSS 是以“.scss”后缀为扩展名
     >
-    > (2) 语法书写方式不同，Sass 是以严格的缩进式语法规则来书写，不带大括号({})和分号(;)，
+    > (2) 语法不同，Sass 是以严格的缩进式语法，不带大括号({})和分号(;)，
     >
     > ​      而 SCSS 的语法书写和我们的 CSS 语法书写方式非常类似。
 
@@ -227,11 +210,11 @@
 
     > sass test.scss  css/test.css
     >
-    > sass --watch test.scss:css/test.css  // 自动编译
+    > sass --watch test.scss:css/test.css  // 自动编译指定文件
     >
     > sass --watch scss:css  // 监测目录 
     >
-    > sass --watch scss:css --style compact
+    > sass --watch scss:css --style compact  // 监测目标并按指定格式输出
 
     ​
 
